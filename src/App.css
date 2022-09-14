@@ -1,0 +1,68 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+.App{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    width: 1000px;
+    height: 500px;
+    background-color:rgb(42, 168, 223);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+}
+.flex-words{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding: 15px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+
+.flex-input{
+    display: flex;
+    justify-content: center;
+    height: 200px;
+    align-items: center;
+    margin: 20px;
+}
+.input{
+    width: 100vw;
+    height: 30px;
+    border: none;
+    background-color: rgb(246, 246, 246);
+    text-align: center;
+}
+
+.flex-button{
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    align-items: center;
+    margin:20px
+}
+
+.start-button{
+    width: 100vw;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(187, 187, 255);
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
+}
+
+.start-button:hover{
+    background-color: rgb(125, 125, 255);
+}
