@@ -66,3 +66,14 @@ body{
 .start-button:hover{
     background-color: rgb(125, 125, 255);
 }
+
+.stats{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    gap:10rem;
+}
+.stats-ans{
+    font-size: 25px;
+}
