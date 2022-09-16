@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
 }
 body{
     margin: 0;
@@ -76,4 +77,11 @@ body{
 }
 .stats-ans{
     font-size: 25px;
+}
+
+.has-background-success{
+    background-color: green;
+}
+.has-background-fail{
+    background-color: red;
 }

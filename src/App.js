@@ -9,7 +9,7 @@ export default function App (){
     },[])
 
     function generateWords(){
-        return randomWords({min:2, max:4})
+        return randomWords({min:5, max:20})
     }
     
     const [start, setStart]=useState(false)
@@ -17,9 +17,11 @@ export default function App (){
     const [changeColor, setChangeColor] = useState(false)
     const [currInput, setCurrInput] = useState([])
     const [currWordIndex, setCurrWordIndex] = useState(0)
+    const [currCharIndex, setCurrCharIndex] = useState(-1)
+    const [currChar, setCurrChar] = useState("")
+
     const [correct, setCorrect]=useState(0)
     const [incorrect, setIncorrect]=useState(0)
-    const [letter, setLetter]=useState('')
     const textInput = useRef(null)
 
     useEffect(()=>{
@@ -33,13 +35,21 @@ export default function App (){
         setHideButton(prev=>!prev)
     }
 
-    const handleKeyDown = ({keyCode}) =>{
+    const handleKeyDown = ({keyCode,key}) =>{
         if(keyCode === 32){
             checkMatch()
             setCurrInput('')
             setCurrWordIndex(currWordIndex+1)
+            setCurrCharIndex(-1)
+        }else if(keyCode===8){
+            setCurrCharIndex(currCharIndex-1)
+            setCurrChar("")
+        } else{
+            setCurrCharIndex(currCharIndex+1)
+            setCurrChar(key)
         }
-        if(currWordIndex==words.length & keyCode===32){
+
+        if(currWordIndex==words.length){
             setHideButton(prev=>!prev)
             setStart(prev=>!prev)
             setChangeColor(prev=>!prev)
@@ -48,10 +58,11 @@ export default function App (){
             setCorrect(0)
             setIncorrect(0)
             setWords(generateWords())
-
+            setCurrCharIndex(-1);
+            setCurrChar("")
         }
     }
-    console.log(currInput, words[words.length-1])
+    // console.log(currInput, words[words.length-1])
     function checkMatch(){
         const wordToCompare = words[currWordIndex]
         const doesItMatch = wordToCompare === currInput.trim()
@@ -63,6 +74,21 @@ export default function App (){
         }
     }
 
+    function getCharClass(wordIdx, charIdx, char){
+        if(wordIdx===currWordIndex && charIdx===currCharIndex && currChar && start){
+            if(char === currChar){
+                return 'has-background-success'
+            } else {
+                return 'has-background-fail'
+            }
+        }else if(wordIdx===currWordIndex && currCharIndex>= words[currWordIndex].length){
+            return 'has-background-fail'
+        } else {
+            return ""
+        }
+    }
+
+
   return (
     <div className='App'>
         <div className='content'>
@@ -73,7 +99,7 @@ export default function App (){
                         <>
                             <span key={i}>
                                 {word.split('').map((char,idx)=>(
-                                    <span key={idx}>{char}</span>
+                                    <span className={getCharClass(i,idx,char)} key={idx}>{char}</span>
                                 ))}
                             </span>
                             <span> </span>
